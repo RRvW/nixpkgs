@@ -62,6 +62,14 @@ with super;
     ];
   });
 
+  digestif = super.digestif.override({
+    makeWrapperArgs = [
+      "--set-default"
+      "DIGESTIFDATA"
+      "$out/$rocksSubdir/digestif/$version/data"
+    ];
+  });
+
   http = super.http.override({
     patches = [
       (pkgs.fetchpatch {

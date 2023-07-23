@@ -48,6 +48,9 @@ buildGoModule rec {
       wrapProgram $out/bin/rclone \
         --suffix PATH : "${lib.makeBinPath [ fuse ] }" \
         --prefix LD_LIBRARY_PATH : "${fuse}/lib"
+
+      # Add unix mount helper, allows mount -t rclone
+      ln -s $out/bin/rclone $out/bin/mount.rclone
     '';
 
   passthru.tests = {
